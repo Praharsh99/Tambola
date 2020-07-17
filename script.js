@@ -109,9 +109,8 @@ populateBoard();
 // This function will generate the amount won by each title
 const populateWinningTitles = () => {
   const moneyCollected = document.getElementById("money").value;
-  const noOfTickets = document.getElementById("tickets").value;
 
-  if (moneyCollected && noOfTickets) {
+  if (moneyCollected) {
     winTitles["Jaldi-5"] = (moneyCollected * 10) / 100;
     winTitles["1st Line"] = (moneyCollected * 15) / 100;
     winTitles["2nd Line"] = (moneyCollected * 15) / 100;
