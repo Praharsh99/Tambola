@@ -1,3 +1,5 @@
+import showAlert from "./alerts.js";
+
 const tambolaBoard = document.querySelector(".board");
 const numbersRead = [];
 const winTitles = {
@@ -123,5 +125,7 @@ const populateWinningTitles = () => {
         title
       ).textContent = `Amount: ${winTitles[title]}`;
     });
+  } else {
+    showAlert("Please enter the amount to calculate!!", "error");
   }
 };
