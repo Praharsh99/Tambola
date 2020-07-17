@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tambola</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS LINKS -->
+    <link rel="stylesheet" href="master.css" />
+
+    <!-- GOOGLE FONTS LINK -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@300;400&family=Squada+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <span class="brand">Tambola</span>
+      <div class="links">
+        <span id="newgame">New Game</span>
+        <!-- <span>Random</span> -->
+      </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+      <div class="history-board box-style">
+        <div class="current-number col-flex">
+          <span class="title">CURRENT NUMBER</span>
+          <span class="value" id="current">-</span>
+        </div>
+        <div class="previous-number col-flex">
+          <span class="title">PREVIOUS NUMBER</span>
+          <span class="value" id="prev">-</span>
+        </div>
+        <div class="last-2nd-number col-flex">
+          <span class="title">LAST 2nd NUMBER</span>
+          <span class="value" id="prev-2">-</span>
+        </div>
+      </div>
+      <div class="board"></div>
+      <div class="winnings-board box-style">
+        <h1>Winnings Board</h1>
+        <div class="game-details">
+          <span class="input-area">
+            <span>Money Collected:</span>
+            <input
+              type="text"
+              id="money"
+              class="input"
+              placeholder="Enter money collected..."
+            />
+          </span>
+          <!-- <span class="input-area">
+            <span>Tickets Sold:</span>
+            <input
+              type="text"
+              id="tickets"
+              class="input"
+              placeholder="No. of tickets"
+            />
+          </span> -->
+          <button class="call" id="calculate">Calculate</button>
+        </div>
+        <div class="category-list">
+          <div class="categories">
+            <span class="categories-details"
+              >Jaldi 5: <span id="Jaldi-5">Amount: None</span></span
+            ><input
+              type="text"
+              class="input input-big"
+              placeholder="Enter the Winner"
+            />
+          </div>
+          <div class="categories">
+            <span class="categories-details"
+              >1st Line: <span id="1st Line">Amount: None</span></span
+            ><input
+              type="text"
+              class="input input-big"
+              placeholder="Enter the Winner"
+            />
+          </div>
+          <div class="categories">
+            <span class="categories-details"
+              >2nd Line: <span id="2nd Line">Amount: None</span></span
+            ><input
+              type="text"
+              class="input input-big"
+              placeholder="Enter the Winner"
+            />
+          </div>
+          <div class="categories">
+            <span class="categories-details"
+              >3rd Line: <span id="3rd Line">Amount: None</span></span
+            ><input
+              type="text"
+              class="input input-big"
+              placeholder="Enter the Winner"
+            />
+          </div>
+          <div class="categories">
+            <span class="categories-details"
+              >House Full 1: <span id="House Full 1">Amount: None</span></span
+            ><input
+              type="text"
+              class="input input-big"
+              placeholder="Enter the Winner"
+            />
+          </div>
+          <div class="categories">
+            <span class="categories-details"
+              >House Full 2: <span id="House Full 2">Amount: None</span></span
+            ><input
+              type="text"
+              class="input input-big"
+              placeholder="Enter the Winner"
+            />
+          </div>
+        </div>
+        <button class="call" id="rand" style="margin-top: 2px;">Call</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>Tambola. Feel free to play the game with friends and family!</span>
+      <span>All rights reserved &nbsp; &#169;Praharsh Paravastu</span>
+    </footer>
+  </body>
+  <script type="text/javascript" src="script.js"></script>
+</html>
