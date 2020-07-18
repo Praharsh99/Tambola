@@ -351,7 +351,6 @@ footer {
   width: 100%;
   text-align: center;
   padding-bottom: 2rem;
-  /* border-bottom: 1px solid rgba(158, 158, 158, 0.6); */
   border-bottom: 1px solid #fff;
 }
 
@@ -374,7 +373,6 @@ footer {
   padding: 1.5rem 1.2rem 0.5rem 1.2rem;
   width: 90%;
   font-family: "Bebas Neue", cursive;
-  /* border-bottom: 1px solid rgba(158, 158, 158, 0.6); */
   border-bottom: 1px solid #bbb;
 }
 
@@ -397,5 +395,5 @@ footer {
 .winner-prize {
   font-size: 1.8rem;
   width: 10%;
-  color: #1319e5;
+  color: #1121e5;
 }
