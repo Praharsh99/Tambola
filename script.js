@@ -2,8 +2,10 @@ import {
   readNumber,
   populateWinningTitlesPrices,
   populateBoard,
+  newGame,
   manual,
   automatic,
+  endGame,
 } from "./utils.js";
 
 // EVENT LISTENERS
@@ -14,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // This will start a new game
-document
-  .getElementById("newgame")
-  .addEventListener("click", () => location.reload());
+document.getElementById("newgame").addEventListener("click", () => {
+  newGame();
+});
 
 // MANUAL GAME
 document.getElementById("manual").addEventListener("click", () => {
@@ -36,4 +38,9 @@ document.getElementById("rand").addEventListener("click", () => {
 // Calculates the prices for each winning title depending on the collected amount
 document.getElementById("calculate").addEventListener("click", () => {
   populateWinningTitlesPrices();
+});
+
+// This will check for all the winners and end the game
+document.getElementById("end-game").addEventListener("click", () => {
+  endGame();
 });

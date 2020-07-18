@@ -100,6 +100,15 @@ export const readNumber = () => {
   }
 };
 
+// NEW GAME FUNCTION
+export const newGame = () => {
+  let response = confirm(
+    "This will reset the game and the stats. Are you sure you want to reset! 😲😲"
+  );
+
+  response ? location.reload() : showAlert("Good Choice 😎", "success");
+};
+
 // TIMER FUNCTION
 const startInterval = (timer) => {
   let clearId = setInterval(() => {
@@ -112,9 +121,19 @@ const startInterval = (timer) => {
 // MANUAL GAMEPLAY
 export const manual = () => {
   let autoButton = document.getElementById("auto");
-  autoButton.id = "rand";
-  autoButton.textContent = "Call";
-  autoButton.removeAttribute("timer-id");
+
+  if (autoButton) {
+    autoButton.id = "rand";
+    autoButton.textContent = "Call";
+    autoButton.removeAttribute("timer-id");
+
+    showAlert(
+      "Switched to manual mode, to get the next number click the call button 👇🏻",
+      "info"
+    );
+  } else {
+    showAlert("Already in manual mode!! 🤦🏻‍♂️", "error");
+  }
 };
 
 // AUTOMATIC GAMEPLAY
@@ -152,4 +171,88 @@ const buttonActions = () => {
 
     clearInterval(clearId);
   }
+};
+
+// THIS WILL END THE GAME 😥😥
+const showWinnersBoard = () => {
+  const winnersBoardContainer = document.createElement("div");
+  const winnersBoard = document.createElement("div");
+  winnersBoardContainer.className = "winners-board-container";
+  winnersBoard.className = "winners-board";
+
+  const winners = Object.keys(winTitles).map((title) =>
+    document
+      .getElementById(title)
+      .parentElement.parentElement.lastElementChild.value.trim()
+  );
+
+  const winnersPrize = Object.keys(winTitles).map((title) => winTitles[title]);
+  const winnerTitles = Object.keys(winTitles);
+
+  // Content in the winners board
+  const titleElement = document.createElement("h1");
+  titleElement.textContent = "🎉 Congratulations 🎉";
+  titleElement.className = "congo-title";
+
+  const winnersContainer = document.createElement("div");
+  winnersContainer.className = "winners-container";
+
+  winners.forEach((winner, idx) => {
+    let newWinnerElement = document.createElement("div");
+    let titleElement = document.createElement("span");
+    let nameElement = document.createElement("span");
+    let prizeElement = document.createElement("span");
+
+    titleElement.textContent = winnerTitles[idx];
+    titleElement.className = "winner-title";
+
+    nameElement.textContent = winner;
+    nameElement.className = "winner-name";
+
+    prizeElement.textContent = `₹${winnersPrize[idx]}`;
+    prizeElement.className = "winner-prize";
+
+    newWinnerElement.appendChild(titleElement);
+    newWinnerElement.appendChild(nameElement);
+    newWinnerElement.appendChild(prizeElement);
+    newWinnerElement.className = "winner";
+
+    winnersContainer.appendChild(newWinnerElement);
+  });
+
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "Close";
+  closeButton.className = "btn";
+  closeButton.addEventListener("click", (e) => {
+    closeBoard(e.target.offsetParent);
+  });
+
+  winnersBoard.appendChild(titleElement);
+  winnersBoard.appendChild(winnersContainer);
+  winnersBoard.appendChild(closeButton);
+  winnersBoardContainer.appendChild(winnersBoard);
+  document.querySelector("body").appendChild(winnersBoardContainer);
+};
+
+export const endGame = () => {
+  let somethingEmpty = Object.keys(winTitles).some((title) => {
+    let length = document
+      .getElementById(title)
+      .parentElement.parentElement.lastElementChild.value.trim().length;
+    return length < 1;
+  });
+
+  if (somethingEmpty) {
+    showAlert(
+      "Please fill all the winning titles to end the game! 😑😑",
+      "error"
+    );
+  } else {
+    showWinnersBoard();
+  }
+};
+
+// THIS FUNCTION WILL CLOSE THE WINNERS BOARD
+export const closeBoard = (target) => {
+  target.classList.toggle("visibility");
 };
