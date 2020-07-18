@@ -128,7 +128,7 @@ export const manual = () => {
     autoButton.removeAttribute("timer-id");
 
     showAlert(
-      "Switched to manual mode, to get the next number click the call button 👇🏻",
+      "Switched to manual mode! To call the next number click the call button 👇🏻",
       "info"
     );
   } else {
@@ -139,7 +139,7 @@ export const manual = () => {
 // AUTOMATIC GAMEPLAY
 export const automatic = () => {
   showAlert(
-    "A NEW NUMBER WILL APPEAR ON THE BOARD FOR EVERY 2 SECONDS ! 👀",
+    "A NEW NUMBER WILL APPEAR ON THE BOARD FOR EVERY 4 SECONDS ! 👀",
     "info"
   );
 
@@ -152,7 +152,7 @@ const buttonActions = () => {
   let attr = actionButton.getAttribute("timer-id");
 
   if (!attr) {
-    let timer = 5;
+    let timer = 4;
     let clearId = startInterval(timer);
 
     actionButton.textContent = "Pause";
