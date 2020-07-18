@@ -36,7 +36,9 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.3rem;
+  font-family: "Raleway", sans-serif;
+  font-size: 500;
+  font-size: 1.4rem;
   width: 20%;
   cursor: pointer;
   color: #fff;
@@ -48,7 +50,6 @@ header {
 }
 
 .links span:hover {
-  /* color: rgb(223, 88, 88); */
   color: lightblue;
 }
 
@@ -70,12 +71,6 @@ header {
   border-radius: 0.5rem;
 }
 
-/* .box-style:hover {
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1), 0px 2px 3px rgba(0, 0, 0, 0.12),
-    0px 1px 3px rgba(0, 0, 0, 0.14);
-  transform: translateY(-1px);
-} */
-
 .history-board {
   display: flex;
   flex-direction: column;
@@ -89,6 +84,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: "Raleway", sans-serif;
   color: black;
 }
 
@@ -197,10 +193,12 @@ header {
 }
 
 .input {
-  border: 2px solid rgba(223, 223, 223, 0.3);
+  font-family: "Raleway";
+  border: 2px solid rgba(232, 124, 124, 0.35);
   padding: 0.5rem 1rem;
   width: 103px;
   border-radius: 3px;
+  outline-width: 2px;
 }
 
 .input-big {
@@ -211,7 +209,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .categories {
@@ -233,6 +231,13 @@ header {
 .categories-details span {
   font-size: 1.2rem;
   color: red;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .call {
@@ -279,6 +284,10 @@ header {
 
 .success-alert {
   background-color: rgb(23, 226, 50);
+}
+
+.info-alert {
+  background-color: rgb(231, 158, 22);
 }
 
 footer {

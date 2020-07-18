@@ -92,6 +92,64 @@ export const readNumber = () => {
       numbersRead[numbersRead.length - 3] || "-"
     );
   } else {
+    showAlert(
+      "All the numbers are read! Start a new game to play again",
+      "success"
+    );
     console.log("Game over");
+  }
+};
+
+// TIMER FUNCTION
+const startInterval = (timer) => {
+  let clearId = setInterval(() => {
+    readNumber();
+  }, timer * 1000);
+
+  return clearId;
+};
+
+// MANUAL GAMEPLAY
+export const manual = () => {
+  let autoButton = document.getElementById("auto");
+  autoButton.id = "rand";
+  autoButton.textContent = "Call";
+  autoButton.removeAttribute("timer-id");
+};
+
+// AUTOMATIC GAMEPLAY
+export const automatic = () => {
+  showAlert(
+    "A NEW NUMBER WILL APPEAR ON THE BOARD FOR EVERY 2 SECONDS ! 👀",
+    "info"
+  );
+
+  document.getElementById("rand").id = "auto";
+  buttonActions();
+};
+
+const buttonActions = () => {
+  let actionButton = document.getElementById("auto");
+  let attr = actionButton.getAttribute("timer-id");
+
+  if (!attr) {
+    let timer = 5;
+    let clearId = startInterval(timer);
+
+    actionButton.textContent = "Pause";
+
+    if (attr === null) {
+      actionButton.addEventListener("click", () => {
+        buttonActions();
+      });
+    }
+
+    actionButton.setAttribute("timer-id", clearId);
+  } else {
+    let clearId = +actionButton.getAttribute("timer-id");
+    actionButton.textContent = "Resume";
+    actionButton.setAttribute("timer-id", "");
+
+    clearInterval(clearId);
   }
 };

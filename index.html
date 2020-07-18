@@ -14,14 +14,19 @@
       href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@300;400&family=Squada+One&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- HEADER -->
     <header>
       <span class="brand">Tambola</span>
       <div class="links">
-        <span id="newgame">New Game</span>
-        <!-- <span>Random</span> -->
+        <span id="newgame">New game</span>
+        <span id="manual">Manual</span>
+        <span id="automatic">Automatic</span>
       </div>
     </header>
 
@@ -121,13 +126,18 @@
             />
           </div>
         </div>
-        <button class="call" id="rand" style="margin-top: 2px;">Call</button>
+        <div class="action-buttons">
+          <button class="call" id="rand" style="margin-top: 2px;">Call</button>
+          <button class="call" id="end-game" style="margin-top: 2px;">
+            End Game
+          </button>
+        </div>
       </div>
     </div>
 
     <!-- FOOTER -->
     <footer>
-      <span>Tambola. Feel free to play the game with friends and family!</span>
+      <span>Tambola. Enjoy the game with friends and family!</span>
       <span>All rights reserved &nbsp; &#169;Praharsh Paravastu</span>
     </footer>
   </body>
