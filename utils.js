@@ -13,13 +13,6 @@ export const populateBoard = () => {
     numberBlock.id = i;
     numberBlock.textContent = i;
 
-    // Adding all number to numbersRead list
-    // numbersList[j].push(i);
-
-    // if (i % 10 === 0) {
-    //   j += 1;
-    // }
-
     // Adding it to the board
     tambolaBoard.appendChild(numberBlock);
   }
@@ -60,7 +53,7 @@ const getRandomNumber = () => {
   return { randNumForKeys, randNumForValues };
 };
 
-// UPDATES THE HISTORY BOARD WITH NEW VALUES
+// UPDATES THE NUMBER HISTORY BOARD WITH CURRENT NUMBER
 const updateHistoryBoard = (current, prev, prev_2) => {
   document.querySelector("#current").textContent = current;
   document.querySelector("#prev").textContent = prev;
@@ -180,36 +173,52 @@ const buttonActions = () => {
   }
 };
 
-// THIS WILL END THE GAME 😥😥
+// THIS WILL GENERATE THE FINAL LIST OF WINNERS
 const showWinnersBoard = () => {
+  // winnersBoardContainer -> modal black background
   const winnersBoardContainer = document.createElement("div");
-  const winnersBoard = document.createElement("div");
   winnersBoardContainer.className = "winners-board-container";
+
+  // winnersBoard -> modal blue gradient background
+  const winnersBoard = document.createElement("div");
   winnersBoard.className = "winners-board";
 
+  // This will get the names of the players from the input boxes and store in "winners" array
   const winners = Object.keys(winTitles).map((title) =>
     document
       .getElementById(title)
       .parentElement.parentElement.lastElementChild.value.trim()
   );
 
+  // This will get the calculated price for each title and store in "winnersPrize"
   const winnersPrize = Object.keys(winTitles).map((title) => winTitles[title]);
+
+  // This will get the titles to display and store in "winnerTitles"
   const winnerTitles = Object.keys(winTitles);
 
-  // Content in the winners board
+  // Filling the content in the winners board starts here 👇🏻
+
+  // Congratulations title
   const titleElement = document.createElement("h1");
   titleElement.textContent = "🎉 Congratulations 🎉";
   titleElement.className = "congo-title";
 
+  // THE MAIN DIV which contains all the winners and their prize money
   const winnersContainer = document.createElement("div");
   winnersContainer.className = "winners-container";
 
+  // THIS LOOP is for each winner which creates a DIV that contains (TITLE, NAME, & PRICE)
   winners.forEach((winner, idx) => {
+    // THIS DIV contains all the details for each winner
     let newWinnerElement = document.createElement("div");
+    // SPAN which has title (eg: "Jaldi 5", "House Full 1",...)
     let titleElement = document.createElement("span");
+    // SPAN which has name of the winner (eg: "Praharsh", "Cool Dude 69",...)
     let nameElement = document.createElement("span");
+    // SPAN which has the prize money (eg: "₹15", "₹47.5",...)
     let prizeElement = document.createElement("span");
 
+    // Logic for populating the created elements with respective values
     titleElement.textContent = winnerTitles[idx];
     titleElement.className = "winner-title";
 
@@ -219,14 +228,17 @@ const showWinnersBoard = () => {
     prizeElement.textContent = `₹${winnersPrize[idx]}`;
     prizeElement.className = "winner-prize";
 
+    // appending the elements to THE DIV
     newWinnerElement.appendChild(titleElement);
     newWinnerElement.appendChild(nameElement);
     newWinnerElement.appendChild(prizeElement);
     newWinnerElement.className = "winner";
 
+    // Appending the newly created winner to THE MAIN DIV
     winnersContainer.appendChild(newWinnerElement);
   });
 
+  // CLOSE BUTTON to close the winners board
   const closeButton = document.createElement("button");
   closeButton.textContent = "Close";
   closeButton.className = "btn";
@@ -234,13 +246,17 @@ const showWinnersBoard = () => {
     closeBoard(e.target.offsetParent);
   });
 
+  // Finally appending all the main contents to the modal
   winnersBoard.appendChild(titleElement);
   winnersBoard.appendChild(winnersContainer);
   winnersBoard.appendChild(closeButton);
   winnersBoardContainer.appendChild(winnersBoard);
+
+  // Appending modal to the DOM
   document.querySelector("body").appendChild(winnersBoardContainer);
 };
 
+// THIS WILL END THE GAME 😥😥
 export const endGame = () => {
   let somethingEmpty = Object.keys(winTitles).some((title) => {
     let length = document
@@ -265,6 +281,13 @@ export const closeBoard = (target) => {
 };
 
 // Test
+// Adding all number to numbersRead list
+// numbersList[j].push(i);
+
+// if (i % 10 === 0) {
+//   j += 1;
+// }
+
 // export const readNumber = () => {
 //   if (numbersRead.length < 90) {
 //     let currentNumber;
