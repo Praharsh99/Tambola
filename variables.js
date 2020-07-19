@@ -7,16 +7,4 @@ export const winTitles = {
   "House Full 2": undefined,
 };
 
-export const numbersList = {
-  1: [],
-  2: [],
-  3: [],
-  4: [],
-  5: [],
-  6: [],
-  7: [],
-  8: [],
-  9: [],
-};
-
 export const numbersRead = [];
