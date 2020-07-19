@@ -1,11 +1,14 @@
 import { winTitles, numbersRead } from "./variables.js";
+import { storeLocally } from "./persist.js";
 import showAlert from "./alerts.js";
+
+// GLOBAL VARIABLES THESE ARE FILLED BY THE showWinnersBoard() method!!!
+let winners;
 
 // POPULATES NUMBERS TO BOARD USE THIS FOR NEW GAME!!!
 const tambolaBoard = document.querySelector(".board");
 
 export const populateBoard = () => {
-  var j = 1;
   for (var i = 1; i < 91; i++) {
     // Creating the number block and inserting the number into it
     const numberBlock = document.createElement("span");
@@ -18,23 +21,30 @@ export const populateBoard = () => {
   }
 };
 
-// This function will generate the amount won by each title
+// Calculate the money for title based on percentages
+const calculateMoney = (moneyCollected) => {
+  winTitles._jaldi_5 = (moneyCollected * 10) / 100;
+  winTitles._1st_line = (moneyCollected * 15) / 100;
+  winTitles._2nd_line = (moneyCollected * 15) / 100;
+  winTitles._3rd_line = (moneyCollected * 15) / 100;
+  winTitles._housefull_1 = (moneyCollected * 25) / 100;
+  winTitles._housefull_2 = (moneyCollected * 20) / 100;
+};
+
+// This function will generate the amount won by each title and updates the [AMOUNT: NONE] HTML TEXT in DOM
 export const populateWinningTitlesPrices = () => {
   const moneyCollected = document.getElementById("money").value;
 
   if (moneyCollected) {
-    winTitles["Jaldi-5"] = (moneyCollected * 10) / 100;
-    winTitles["1st Line"] = (moneyCollected * 15) / 100;
-    winTitles["2nd Line"] = (moneyCollected * 15) / 100;
-    winTitles["3rd Line"] = (moneyCollected * 15) / 100;
-    winTitles["House Full 1"] = (moneyCollected * 25) / 100;
-    winTitles["House Full 2"] = (moneyCollected * 20) / 100;
+    calculateMoney(moneyCollected);
 
     Object.keys(winTitles).forEach((title) => {
       document.getElementById(
         title
       ).textContent = `Amount: ${winTitles[title]}`;
     });
+
+    document.getElementById("calculate").setAttribute("calculated", "yeah");
   } else {
     showAlert("Please enter the amount to calculate!!", "error");
   }
@@ -78,13 +88,18 @@ export const readNumber = () => {
       else isNewNumber = numbersRead.includes(currentNumber);
     }
 
-    // Push that number to the read list and add a style to it
+    // Push that number to the read list
     numbersRead.push(currentNumber);
+
+    // Update the number on the board with new style
     document.getElementById(currentNumber).classList.add("number-highlight");
+
+    // Update the previous highlighted element with red color
     if (numbersRead[numbersRead.length - 2]) {
       document.getElementById(numbersRead[numbersRead.length - 2]).className =
         "number-block number-read";
     }
+
     // Update the history board
     updateHistoryBoard(
       currentNumber,
@@ -96,7 +111,6 @@ export const readNumber = () => {
       "All the numbers are read! Start a new game to play again",
       "success"
     );
-    console.log("Game over");
   }
 };
 
@@ -184,20 +198,19 @@ const showWinnersBoard = () => {
   winnersBoard.className = "winners-board";
 
   // This will get the names of the players from the input boxes and store in "winners" array
-  const winners = Object.keys(winTitles).map((title) =>
-    document
-      .getElementById(title)
-      .parentElement.parentElement.lastElementChild.value.trim()
+  winners = Object.keys(winTitles).map((title) =>
+    document.getElementById(`${title}_`).value.trim()
   );
 
   // This will get the calculated price for each title and store in "winnersPrize"
   const winnersPrize = Object.keys(winTitles).map((title) => winTitles[title]);
 
   // This will get the titles to display and store in "winnerTitles"
-  const winnerTitles = Object.keys(winTitles);
+  const winnerTitles = Object.keys(winTitles).map((title) =>
+    title.replace("_", " ").trim().split("_").join(" ")
+  );
 
-  // Filling the content in the winners board starts here 👇🏻
-
+  // Filling the content in the winners board starts here 👇🏻👇🏻👇🏻
   // Congratulations title
   const titleElement = document.createElement("h1");
   titleElement.textContent = "🎉 Congratulations 🎉";
@@ -213,7 +226,7 @@ const showWinnersBoard = () => {
     let newWinnerElement = document.createElement("div");
     // SPAN which has title (eg: "Jaldi 5", "House Full 1",...)
     let titleElement = document.createElement("span");
-    // SPAN which has name of the winner (eg: "Praharsh", "Cool Dude 69",...)
+    // SPAN which has name of the winner (eg: "Praharsh", "Scooby",...)
     let nameElement = document.createElement("span");
     // SPAN which has the prize money (eg: "₹15", "₹47.5",...)
     let prizeElement = document.createElement("span");
@@ -238,6 +251,11 @@ const showWinnersBoard = () => {
     winnersContainer.appendChild(newWinnerElement);
   });
 
+  // DIV that contains two buttons
+  const btnDiv = document.createElement("div");
+  btnDiv.className = "action-buttons";
+  btnDiv.style.width = "80%";
+
   // CLOSE BUTTON to close the winners board
   const closeButton = document.createElement("button");
   closeButton.textContent = "Close";
@@ -246,10 +264,22 @@ const showWinnersBoard = () => {
     closeBoard(e.target.offsetParent);
   });
 
+  // SAVE BUTTON to save it to the local storage
+  const saveButton = document.createElement("button");
+  saveButton.textContent = "Save";
+  saveButton.className = "btn";
+  saveButton.addEventListener("click", () => {
+    reqToStoreData();
+  });
+
+  // Append those btns to btnDiv
+  btnDiv.appendChild(closeButton);
+  btnDiv.appendChild(saveButton);
+
   // Finally appending all the main contents to the modal
   winnersBoard.appendChild(titleElement);
   winnersBoard.appendChild(winnersContainer);
-  winnersBoard.appendChild(closeButton);
+  winnersBoard.appendChild(btnDiv);
   winnersBoardContainer.appendChild(winnersBoard);
 
   // Appending modal to the DOM
@@ -258,10 +288,24 @@ const showWinnersBoard = () => {
 
 // THIS WILL END THE GAME 😥😥
 export const endGame = () => {
+  // Checking if money is calculated
+  let calculateButtonPressed = document
+    .getElementById("calculate")
+    .getAttribute("calculated")
+    ? true
+    : false;
+
+  if (!calculateButtonPressed) {
+    showAlert(
+      "Please fill the money collected field and calculate 😑😑",
+      "error"
+    );
+    return;
+  }
+
+  // Checking if winners for all titles are available
   let somethingEmpty = Object.keys(winTitles).some((title) => {
-    let length = document
-      .getElementById(title)
-      .parentElement.parentElement.lastElementChild.value.trim().length;
+    let length = document.getElementById(`${title}_`).value.trim().length;
     return length < 1;
   });
 
@@ -278,4 +322,21 @@ export const endGame = () => {
 // THIS FUNCTION WILL CLOSE THE WINNERS BOARD
 export const closeBoard = (target) => {
   target.classList.toggle("visibility");
+};
+
+// THIS WILL STORE THE DATA LOCALLY
+export const reqToStoreData = () => {
+  const moneyCollected = document.getElementById("money").value.trim();
+  let response = null;
+
+  moneyCollected
+    ? (response = storeLocally(moneyCollected, winTitles, winners))
+    : showAlert(
+        "Please enter the amount in the money collected field 😕😕",
+        "error"
+      );
+
+  response
+    ? showAlert("Data stored successfully!", "success")
+    : showAlert("Something went wrong! Try again later 😵😵", "error");
 };

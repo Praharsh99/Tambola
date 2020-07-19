@@ -1,10 +1,12 @@
+// This will store the price money for each title
 export const winTitles = {
-  "Jaldi-5": undefined,
-  "1st Line": undefined,
-  "2nd Line": undefined,
-  "3rd Line": undefined,
-  "House Full 1": undefined,
-  "House Full 2": undefined,
+  _jaldi_5: undefined,
+  _1st_line: undefined,
+  _2nd_line: undefined,
+  _3rd_line: undefined,
+  _housefull_1: undefined,
+  _housefull_2: undefined,
 };
 
+// This contains all the read number on the board
 export const numbersRead = [];
