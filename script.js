@@ -1,5 +1,5 @@
 import {
-  readNumber,
+  callReadNumber,
   populateWinningTitlesPrices,
   populateBoard,
   newGame,
@@ -27,12 +27,12 @@ document.getElementById("manual").addEventListener("click", () => {
 
 // AUTOMATIC GAME
 document.getElementById("automatic").addEventListener("click", () => {
-  automatic();
+  // automatic();
 });
 
 // Get a random number and edits the style for that number, updates history board
 document.getElementById("rand").addEventListener("click", () => {
-  readNumber();
+  callReadNumber();
 });
 
 // Calculates the prices for each winning title depending on the collected amount

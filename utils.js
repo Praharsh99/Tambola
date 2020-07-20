@@ -2,8 +2,17 @@ import { winTitles, numbersRead } from "./variables.js";
 import { storeLocally } from "./persist.js";
 import showAlert from "./alerts.js";
 
-// GLOBAL VARIABLES THESE ARE FILLED BY THE showWinnersBoard() method!!!
+// GLOBAL VARIABLES
+// THIS VARIABLE IS FILLED BY THE showWinnersBoard() method!!!
 let winners;
+
+// I declared this variable to prevent a number to appear after clicking the pause button
+// This variable is manipulated in the buttonActions(), button eventListener more precisely
+// This variable is used as a argument in the setInterval()'s readNumber([iWillDecide]) call;
+// This variable becomes "0" when the pause button is clicked and "1" when resume button is clicked
+// So, when the setInterval() method is about to call the readNumber(arg) method "0" is passed to the method
+// Hence prevents the number overflow bug
+let iWillDecide = 1;
 
 // POPULATES NUMBERS TO BOARD USE THIS FOR NEW GAME!!!
 const tambolaBoard = document.querySelector(".board");
@@ -50,6 +59,11 @@ export const populateWinningTitlesPrices = () => {
   }
 };
 
+// CALL READ NUMBER FUNCTION FOR MANUAL CALLING READ NUMBER
+export const callReadNumber = () => {
+  readNumber(iWillDecide);
+};
+
 // CREATES A RANDOM NUMBER
 const getRandomNumber = () => {
   let randNumForKeys = parseInt(Math.random() * 10);
@@ -71,46 +85,48 @@ const updateHistoryBoard = (current, prev, prev_2) => {
 };
 
 //  Call the random number generator and changes the style for that number on board
-export const readNumber = () => {
-  if (numbersRead.length < 90) {
-    let currentNumber;
-    let isNewNumber = true;
+export const readNumber = (shouldIExecute) => {
+  if (shouldIExecute) {
+    if (numbersRead.length < 90) {
+      let currentNumber;
+      let isNewNumber = true;
 
-    // Get a random number untill it is a new one!
-    while (isNewNumber) {
-      let { randNumForKeys, randNumForValues } = getRandomNumber();
+      // Get a random number untill it is a new one!
+      while (isNewNumber) {
+        let { randNumForKeys, randNumForValues } = getRandomNumber();
 
-      // randNumForKeys -> decides the tens place
-      // randNumForValues -> decides the units place
-      currentNumber = +`${randNumForKeys}${randNumForValues}`;
+        // randNumForKeys -> decides the tens place
+        // randNumForValues -> decides the units place
+        currentNumber = +`${randNumForKeys}${randNumForValues}`;
 
-      if (!currentNumber) isNewNumber = true;
-      else isNewNumber = numbersRead.includes(currentNumber);
+        if (!currentNumber) isNewNumber = true;
+        else isNewNumber = numbersRead.includes(currentNumber);
+      }
+
+      // Push that number to the read list
+      numbersRead.push(currentNumber);
+
+      // Update the number on the board with new style
+      document.getElementById(currentNumber).classList.add("number-highlight");
+
+      // Update the previous highlighted element with red color
+      if (numbersRead[numbersRead.length - 2]) {
+        document.getElementById(numbersRead[numbersRead.length - 2]).className =
+          "number-block number-read";
+      }
+
+      // Update the history board
+      updateHistoryBoard(
+        currentNumber,
+        numbersRead[numbersRead.length - 2] || "-",
+        numbersRead[numbersRead.length - 3] || "-"
+      );
+    } else {
+      showAlert(
+        "All the numbers are read! Start a new game to play again",
+        "success"
+      );
     }
-
-    // Push that number to the read list
-    numbersRead.push(currentNumber);
-
-    // Update the number on the board with new style
-    document.getElementById(currentNumber).classList.add("number-highlight");
-
-    // Update the previous highlighted element with red color
-    if (numbersRead[numbersRead.length - 2]) {
-      document.getElementById(numbersRead[numbersRead.length - 2]).className =
-        "number-block number-read";
-    }
-
-    // Update the history board
-    updateHistoryBoard(
-      currentNumber,
-      numbersRead[numbersRead.length - 2] || "-",
-      numbersRead[numbersRead.length - 3] || "-"
-    );
-  } else {
-    showAlert(
-      "All the numbers are read! Start a new game to play again",
-      "success"
-    );
   }
 };
 
@@ -126,7 +142,7 @@ export const newGame = () => {
 // TIMER FUNCTION
 const startInterval = (timer) => {
   let clearId = setInterval(() => {
-    readNumber();
+    readNumber(iWillDecide);
   }, timer * 1000);
 
   return clearId;
@@ -137,9 +153,11 @@ export const manual = () => {
   let autoButton = document.getElementById("auto");
 
   if (autoButton) {
+    iWillDecide = 1;
     autoButton.id = "rand";
     autoButton.textContent = "Call";
     autoButton.removeAttribute("timer-id");
+    autoButton.removeEventListener("click", handleClickEvent);
 
     showAlert(
       "Switched to manual mode! To call the next number click the call button 👇🏻",
@@ -161,20 +179,24 @@ export const automatic = () => {
   buttonActions();
 };
 
+// THIS FUNCTION WILL RESUME AND PAUSE THE GAME
+const handleClickEvent = () => {
+  iWillDecide = iWillDecide == 1 ? 0 : 1;
+  buttonActions();
+};
+
 const buttonActions = () => {
   let actionButton = document.getElementById("auto");
   let attr = actionButton.getAttribute("timer-id");
 
   if (!attr) {
-    let timer = 4;
+    let timer = 2;
     let clearId = startInterval(timer);
 
     actionButton.textContent = "Pause";
 
     if (attr === null) {
-      actionButton.addEventListener("click", () => {
-        buttonActions();
-      });
+      actionButton.addEventListener("click", handleClickEvent);
     }
 
     actionButton.setAttribute("timer-id", clearId);
