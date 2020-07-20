@@ -320,17 +320,59 @@ footer {
   z-index: 10;
 }
 
+.game-board-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  background-color: rgb(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 50px 0;
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.game-board-container .winners-board {
+  margin-bottom: 4rem;
+}
+
+.game-board-container .winners-board:last-child {
+  margin-bottom: 0 !important;
+}
+
+.game-board-container::-webkit-scrollbar {
+  width: 6.5px;
+  background-color: transparent;
+}
+
+.game-board-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    45deg,
+    rgb(28 114 222 / 0.98),
+    rgb(19 206 215 / 0.98)
+  );
+  border-radius: 0.1rem;
+}
+
+.game-board-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.1rem;
+}
+
 .visibility {
   visibility: hidden;
 }
 
-/* WHITE CONTAINER */
+/* BLUE GRADIENT CONTAINER */
 .winners-board {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* height: 60%; */
   width: 30%;
   padding: 3rem 2rem;
   background-color: #fff;
@@ -345,15 +387,37 @@ footer {
 }
 
 /* CONGRATULATIONS TITLE */
-.congo-title {
+.board-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   font-family: "Open Sans", sans-serif;
   font-size: 2.5rem;
   text-transform: uppercase;
   color: black;
-  width: 100%;
+  width: 95%;
   text-align: center;
-  padding-bottom: 2rem;
+  padding-bottom: 1.2rem;
   border-bottom: 1px solid #fff;
+}
+
+.sub-title {
+  position: absolute;
+  bottom: 2px;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.sub-title-1 {
+  left: 0;
+}
+
+.sub-title-2 {
+  right: 0;
 }
 
 /* CONTAINER FOR ALL THE WINNERS LIST */

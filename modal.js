@@ -6,15 +6,10 @@ const toggleBoard = (target) => {
 };
 
 // THIS WILL GENERATE THE FINAL LIST OF WINNERS
-export const showWinnersBoard = (title, winTitles, showSaveButton) => {
+export const showWinnersBoard = (title, winTitles, winners, showSaveButton) => {
   // winnersBoard -> modal blue gradient background
   const board = document.createElement("div");
   board.className = "winners-board";
-
-  // This will get the names of the players from the input boxes and store in "winners" array
-  const winners = Object.keys(winTitles).map((title) =>
-    document.getElementById(`${title}_`).value.trim()
-  );
 
   // This will get the calculated price for each title and store in "winnersPrize"
   const winnersPrize = Object.keys(winTitles).map((title) => winTitles[title]);
@@ -27,8 +22,8 @@ export const showWinnersBoard = (title, winTitles, showSaveButton) => {
   // Filling the content in the winners board starts here 👇🏻👇🏻👇🏻
   // Congratulations title
   const titleElement = document.createElement("h1");
-  titleElement.textContent = title;
-  titleElement.className = "congo-title";
+  titleElement.innerHTML = title;
+  titleElement.className = "board-title";
 
   // THE MAIN DIV which contains all the winners and their prize money
   const winnersContainer = document.createElement("div");

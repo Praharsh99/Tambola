@@ -246,13 +246,18 @@ export const endGame = () => {
     if (winnersBoardContainer) {
       toggleBoard(winnersBoardContainer);
     } else {
-      // winnersBoardContainer -> modal black background
+      // boardContainer -> modal black background
       const boardContainer = document.createElement("div");
       boardContainer.className = "winners-board-container";
+
+      const winners = Object.keys(winTitles).map((title) =>
+        document.getElementById(`${title}_`).value.trim()
+      );
 
       const childElement = showWinnersBoard(
         "🎉 Congratulations 🎉",
         winTitles,
+        winners,
         true
       );
 
