@@ -261,15 +261,15 @@ const showWinnersBoard = () => {
   closeButton.textContent = "Close";
   closeButton.className = "btn";
   closeButton.addEventListener("click", (e) => {
-    closeBoard(e.target.offsetParent);
+    toggleBoard(e.target.offsetParent);
   });
 
   // SAVE BUTTON to save it to the local storage
   const saveButton = document.createElement("button");
   saveButton.textContent = "Save";
   saveButton.className = "btn";
-  saveButton.addEventListener("click", () => {
-    reqToStoreData();
+  saveButton.addEventListener("click", (e) => {
+    reqToStoreData(e);
   });
 
   // Append those btns to btnDiv
@@ -315,17 +315,23 @@ export const endGame = () => {
       "error"
     );
   } else {
-    showWinnersBoard();
+    const winnersBoardContainer = document.querySelector(
+      ".winners-board-container"
+    );
+
+    winnersBoardContainer
+      ? toggleBoard(winnersBoardContainer)
+      : showWinnersBoard();
   }
 };
 
 // THIS FUNCTION WILL CLOSE THE WINNERS BOARD
-export const closeBoard = (target) => {
+export const toggleBoard = (target) => {
   target.classList.toggle("visibility");
 };
 
 // THIS WILL STORE THE DATA LOCALLY
-export const reqToStoreData = () => {
+export const reqToStoreData = (event) => {
   const moneyCollected = document.getElementById("money").value.trim();
   let response = null;
 
@@ -337,6 +343,7 @@ export const reqToStoreData = () => {
       );
 
   response
-    ? showAlert("Data stored successfully!", "success")
+    ? (showAlert("Data stored successfully! 🤘🏻🤘🏻", "success"),
+      (event.target.textContent = "Saved"))
     : showAlert("Something went wrong! Try again later 😵😵", "error");
 };
