@@ -288,7 +288,7 @@ const showWinnersBoard = () => {
 
 // THIS WILL END THE GAME 😥😥
 export const endGame = () => {
-  // Checking if money is calculated
+  // Checking if prize money is calculated
   let calculateButtonPressed = document
     .getElementById("calculate")
     .getAttribute("calculated")
@@ -315,6 +315,8 @@ export const endGame = () => {
       "error"
     );
   } else {
+    // Checking if winnersBoardContainer is already appended to the body
+    // If already there, we just change the style, or we create and append
     const winnersBoardContainer = document.querySelector(
       ".winners-board-container"
     );
@@ -332,18 +334,21 @@ export const toggleBoard = (target) => {
 
 // THIS WILL STORE THE DATA LOCALLY
 export const reqToStoreData = (event) => {
-  const moneyCollected = document.getElementById("money").value.trim();
-  let response = null;
+  const element = event.target;
+  const attr = element.getAttribute("saved");
 
-  moneyCollected
-    ? (response = storeLocally(moneyCollected, winTitles, winners))
-    : showAlert(
-        "Please enter the amount in the money collected field 😕😕",
-        "error"
-      );
+  // Checking if data was already stored locally
+  if (!attr) {
+    const moneyCollected = document.getElementById("money").value.trim();
 
-  response
-    ? (showAlert("Data stored successfully! 🤘🏻🤘🏻", "success"),
-      (event.target.textContent = "Saved"))
-    : showAlert("Something went wrong! Try again later 😵😵", "error");
+    const response = storeLocally(moneyCollected, winTitles, winners);
+
+    response
+      ? (showAlert("Data stored successfully! 🤘🏻🤘🏻", "success"),
+        (event.target.textContent = "Saved"),
+        event.target.setAttribute("saved", "done"))
+      : showAlert("Something went wrong! Try again later 😵😵", "error");
+  } else {
+    showAlert("Data already exists! 😅😅", "info");
+  }
 };

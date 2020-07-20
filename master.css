@@ -254,6 +254,7 @@ header {
   margin-top: 2rem;
   align-self: center;
   backface-visibility: hidden;
+  outline: none;
 }
 
 .btn:hover {
