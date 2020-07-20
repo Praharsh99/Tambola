@@ -8,6 +8,8 @@ import {
   endGame,
 } from "./utils.js";
 
+import { gameStats } from "./persist.js";
+
 // EVENT LISTENERS
 
 // This call will generate the numbers [1 - 90] and create a block element for that numbers and put those on the board
@@ -28,6 +30,11 @@ document.getElementById("manual").addEventListener("click", () => {
 // AUTOMATIC GAME
 document.getElementById("automatic").addEventListener("click", () => {
   // automatic();
+});
+
+// GAME STATS
+document.getElementById("game-stats").addEventListener("click", () => {
+  gameStats();
 });
 
 // Get a random number and edits the style for that number, updates history board

@@ -1,10 +1,9 @@
 import { winTitles, numbersRead } from "./variables.js";
+import { showWinnersBoard } from "./modal.js";
 import { storeLocally } from "./persist.js";
 import showAlert from "./alerts.js";
 
 // GLOBAL VARIABLES
-// THIS VARIABLE IS FILLED BY THE showWinnersBoard() method!!!
-let winners;
 
 // I declared this variable to prevent a number to appear after clicking the pause button
 // This variable is manipulated in the buttonActions(), button eventListener more precisely
@@ -209,105 +208,6 @@ const buttonActions = () => {
   }
 };
 
-// THIS WILL GENERATE THE FINAL LIST OF WINNERS
-const showWinnersBoard = () => {
-  // winnersBoardContainer -> modal black background
-  const winnersBoardContainer = document.createElement("div");
-  winnersBoardContainer.className = "winners-board-container";
-
-  // winnersBoard -> modal blue gradient background
-  const winnersBoard = document.createElement("div");
-  winnersBoard.className = "winners-board";
-
-  // This will get the names of the players from the input boxes and store in "winners" array
-  winners = Object.keys(winTitles).map((title) =>
-    document.getElementById(`${title}_`).value.trim()
-  );
-
-  // This will get the calculated price for each title and store in "winnersPrize"
-  const winnersPrize = Object.keys(winTitles).map((title) => winTitles[title]);
-
-  // This will get the titles to display and store in "winnerTitles"
-  const winnerTitles = Object.keys(winTitles).map((title) =>
-    title.replace("_", " ").trim().split("_").join(" ")
-  );
-
-  // Filling the content in the winners board starts here 👇🏻👇🏻👇🏻
-  // Congratulations title
-  const titleElement = document.createElement("h1");
-  titleElement.textContent = "🎉 Congratulations 🎉";
-  titleElement.className = "congo-title";
-
-  // THE MAIN DIV which contains all the winners and their prize money
-  const winnersContainer = document.createElement("div");
-  winnersContainer.className = "winners-container";
-
-  // THIS LOOP is for each winner which creates a DIV that contains (TITLE, NAME, & PRICE)
-  winners.forEach((winner, idx) => {
-    // THIS DIV contains all the details for each winner
-    let newWinnerElement = document.createElement("div");
-    // SPAN which has title (eg: "Jaldi 5", "House Full 1",...)
-    let titleElement = document.createElement("span");
-    // SPAN which has name of the winner (eg: "Praharsh", "Scooby",...)
-    let nameElement = document.createElement("span");
-    // SPAN which has the prize money (eg: "₹15", "₹47.5",...)
-    let prizeElement = document.createElement("span");
-
-    // Logic for populating the created elements with respective values
-    titleElement.textContent = winnerTitles[idx];
-    titleElement.className = "winner-title";
-
-    nameElement.textContent = winner;
-    nameElement.className = "winner-name";
-
-    prizeElement.textContent = `₹${winnersPrize[idx]}`;
-    prizeElement.className = "winner-prize";
-
-    // appending the elements to THE DIV
-    newWinnerElement.appendChild(titleElement);
-    newWinnerElement.appendChild(nameElement);
-    newWinnerElement.appendChild(prizeElement);
-    newWinnerElement.className = "winner";
-
-    // Appending the newly created winner to THE MAIN DIV
-    winnersContainer.appendChild(newWinnerElement);
-  });
-
-  // DIV that contains two buttons
-  const btnDiv = document.createElement("div");
-  btnDiv.className = "action-buttons";
-  btnDiv.style.width = "80%";
-
-  // CLOSE BUTTON to close the winners board
-  const closeButton = document.createElement("button");
-  closeButton.textContent = "Close";
-  closeButton.className = "btn";
-  closeButton.addEventListener("click", (e) => {
-    toggleBoard(e.target.offsetParent);
-  });
-
-  // SAVE BUTTON to save it to the local storage
-  const saveButton = document.createElement("button");
-  saveButton.textContent = "Save";
-  saveButton.className = "btn";
-  saveButton.addEventListener("click", (e) => {
-    reqToStoreData(e);
-  });
-
-  // Append those btns to btnDiv
-  btnDiv.appendChild(closeButton);
-  btnDiv.appendChild(saveButton);
-
-  // Finally appending all the main contents to the modal
-  winnersBoard.appendChild(titleElement);
-  winnersBoard.appendChild(winnersContainer);
-  winnersBoard.appendChild(btnDiv);
-  winnersBoardContainer.appendChild(winnersBoard);
-
-  // Appending modal to the DOM
-  document.querySelector("body").appendChild(winnersBoardContainer);
-};
-
 // THIS WILL END THE GAME 😥😥
 export const endGame = () => {
   // Checking if prize money is calculated
@@ -343,15 +243,25 @@ export const endGame = () => {
       ".winners-board-container"
     );
 
-    winnersBoardContainer
-      ? toggleBoard(winnersBoardContainer)
-      : showWinnersBoard();
-  }
-};
+    if (winnersBoardContainer) {
+      toggleBoard(winnersBoardContainer);
+    } else {
+      // winnersBoardContainer -> modal black background
+      const boardContainer = document.createElement("div");
+      boardContainer.className = "winners-board-container";
 
-// THIS FUNCTION WILL CLOSE THE WINNERS BOARD
-export const toggleBoard = (target) => {
-  target.classList.toggle("visibility");
+      const childElement = showWinnersBoard(
+        "🎉 Congratulations 🎉",
+        winTitles,
+        true
+      );
+
+      boardContainer.appendChild(childElement);
+
+      // Appending modal to the DOM
+      document.querySelector("body").appendChild(boardContainer);
+    }
+  }
 };
 
 // THIS WILL STORE THE DATA LOCALLY
@@ -363,7 +273,7 @@ export const reqToStoreData = (event) => {
   if (!attr) {
     const moneyCollected = document.getElementById("money").value.trim();
 
-    const response = storeLocally(moneyCollected, winTitles, winners);
+    const response = storeLocally(moneyCollected, winTitles);
 
     response
       ? (showAlert("Data stored successfully! 🤘🏻🤘🏻", "success"),

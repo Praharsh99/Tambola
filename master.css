@@ -277,6 +277,7 @@ header {
   color: #fff;
   border-radius: 0 0 0.6rem 0.6rem;
   transform: translateX(-50%);
+  z-index: 20;
 }
 
 .error-alert {
