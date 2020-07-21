@@ -54,8 +54,8 @@ document.getElementById("end-game").addEventListener("click", () => {
 });
 
 const callDB = () => {
-  const data = JSON.stringify(GAME_DATA);
-  localStorage.setItem("TAMBOLA_STORAGE_DATA", data);
+  const localData = JSON.stringify(GAME_DATA);
+  localStorage.setItem("TAMBOLA_STORAGE_DATA", localData);
 };
 
 // CODE FOR POPULATING THE PREVIOUS GAME DATA TO LOCAL STORAGE
