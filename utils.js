@@ -1,5 +1,6 @@
 import { winTitles, numbersRead } from "./variables.js";
 import { showWinnersBoard } from "./modal.js";
+import { toggleBoard } from "./reusable.functions.js";
 import { storeLocally } from "./persist.js";
 import showAlert from "./alerts.js";
 

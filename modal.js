@@ -1,9 +1,5 @@
 import { reqToStoreData } from "./utils.js";
-
-// THIS FUNCTION WILL CLOSE THE WINNERS BOARD
-const toggleBoard = (target) => {
-  target.classList.toggle("visibility");
-};
+import { toggleBoard } from "./reusable.functions.js";
 
 // THIS WILL GENERATE THE FINAL LIST OF WINNERS
 export const showWinnersBoard = (title, winTitles, winners, showSaveButton) => {

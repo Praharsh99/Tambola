@@ -56,7 +56,7 @@ export const gameStats = () => {
 
       const title = `<span class="sub-title sub-title-1">${
         playedAt.split(",")[0]
-      }</span> <span>🏆 GAME ${game} 🏆</span> <span class="sub-title sub-title-2">${
+      }</span>🏆&nbsp;<span class="main-title">GAME ${game}</span>&nbsp;🏆<span class="sub-title sub-title-2">${
         playedAt.split(",")[1]
       }</span>`;
 

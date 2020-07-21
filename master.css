@@ -396,16 +396,30 @@ footer {
   font-family: "Open Sans", sans-serif;
   font-size: 2.5rem;
   text-transform: uppercase;
-  color: black;
   width: 95%;
   text-align: center;
   padding-bottom: 1.2rem;
   border-bottom: 1px solid #fff;
 }
 
+.main-title {
+  background-image: linear-gradient(
+    to right,
+    rgb(162 31 216 / 98%),
+    rgb(19 97 215 / 98%)
+  );
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
 .sub-title {
+  color: black;
   position: absolute;
-  bottom: 2px;
+  bottom: 3px;
   font-family: Arial, sans-serif;
   font-size: 1.2rem;
   color: #fff;
@@ -446,20 +460,21 @@ footer {
 .winner-title {
   font-size: 2rem;
   text-align: left;
-  width: 40%;
+  width: 35%;
   color: white;
 }
 
 /* SPAN FOR ACTUAL PLAYER WHO WON THE TITLE */
 .winner-name {
   font-size: 2rem;
-  width: 50%;
+  width: 45%;
   letter-spacing: 1px;
   color: black;
 }
 
 .winner-prize {
   font-size: 1.8rem;
-  width: 10%;
+  text-align: right;
+  width: 15%;
   color: #1121e5;
 }

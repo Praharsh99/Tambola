@@ -7,7 +7,6 @@ import {
   automatic,
   endGame,
 } from "./utils.js";
-
 import { gameStats } from "./persist.js";
 
 // EVENT LISTENERS
@@ -51,3 +50,12 @@ document.getElementById("calculate").addEventListener("click", () => {
 document.getElementById("end-game").addEventListener("click", () => {
   endGame();
 });
+
+const callDB = () => {
+  const data = JSON.stringify(GAME_DATA);
+  localStorage.setItem("TAMBOLA_STORAGE_DATA", data);
+};
+
+// CODE FOR POPULATING THE PREVIOUS GAME DATA TO LOCAL STORAGE
+// import GAME_DATA from "./gameData.js";
+// window.callDB = callDB;
