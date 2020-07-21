@@ -7,6 +7,7 @@ import {
   automatic,
   endGame,
 } from "./utils.js";
+import GAME_DATA from "./gameData.js";
 import { gameStats } from "./persist.js";
 
 // EVENT LISTENERS
@@ -57,5 +58,4 @@ const callDB = () => {
 };
 
 // CODE FOR POPULATING THE PREVIOUS GAME DATA TO LOCAL STORAGE
-// import GAME_DATA from "./gameData.js";
-// window.callDB = callDB;
+window.callDB = callDB;
