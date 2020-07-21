@@ -7,6 +7,7 @@ import {
   automatic,
   endGame,
 } from "./utils.js";
+
 import GAME_DATA from "./gameData.js";
 import { gameStats } from "./persist.js";
 
