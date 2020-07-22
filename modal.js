@@ -2,14 +2,24 @@ import { reqToStoreData } from "./utils.js";
 import { toggleBoard } from "./reusable.functions.js";
 
 // THIS WILL GENERATE THE FINAL LIST OF WINNERS
-export const showWinnersBoard = (title, winTitles, winners, showSaveButton) => {
+export const showWinnersBoard = (title, winTitles, showSaveButton) => {
   // winnersBoard -> modal blue gradient background
   const board = document.createElement("div");
   board.className = "winners-board";
 
   // This will get the calculated price for each title and store in "winnersPrize"
-  const winnersPrize = Object.keys(winTitles).map((title) => winTitles[title]);
+  // "WINTITLES" IS USED HERE TO GRAB prizeMoney
+  const winnersPrize = Object.keys(winTitles).map(
+    (title) => winTitles[title].prizeMoney
+  );
 
+  // This will get the winner for each title and store in "winners"
+  // "WINTITLES" IS USED HERE TO GRAB winner
+  const winners = Object.keys(winTitles).map(
+    (title) => winTitles[title].winner
+  );
+
+  // "WINTITLES" IS USED HERE JUST TO GET ALL THE  GAME TITLES
   // This will get the titles to display and store in "winnerTitles"
   const winnerTitles = Object.keys(winTitles).map((title) =>
     title.replace("_", " ").trim().split("_").join(" ")

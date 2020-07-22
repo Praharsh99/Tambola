@@ -31,13 +31,14 @@ export const populateBoard = () => {
 };
 
 // Calculate the money for title based on percentages
+// winTitles -> prizeMoney prop is set here
 const calculateMoney = (moneyCollected) => {
-  winTitles._jaldi_5 = (moneyCollected * 10) / 100;
-  winTitles._1st_line = (moneyCollected * 15) / 100;
-  winTitles._2nd_line = (moneyCollected * 15) / 100;
-  winTitles._3rd_line = (moneyCollected * 15) / 100;
-  winTitles._housefull_1 = (moneyCollected * 25) / 100;
-  winTitles._housefull_2 = (moneyCollected * 20) / 100;
+  winTitles._jaldi_5.prizeMoney = (moneyCollected * 10) / 100;
+  winTitles._1st_line.prizeMoney = (moneyCollected * 15) / 100;
+  winTitles._2nd_line.prizeMoney = (moneyCollected * 15) / 100;
+  winTitles._3rd_line.prizeMoney = (moneyCollected * 15) / 100;
+  winTitles._housefull_1.prizeMoney = (moneyCollected * 25) / 100;
+  winTitles._housefull_2.prizeMoney = (moneyCollected * 20) / 100;
 };
 
 // This function will generate the amount won by each title and updates the [AMOUNT: NONE] HTML TEXT in DOM
@@ -47,10 +48,11 @@ export const populateWinningTitlesPrices = () => {
   if (moneyCollected) {
     calculateMoney(moneyCollected);
 
+    // "WINTITLES" IS USED HERE TO GRAB THE AMOUNT AND REPLACE THIS "AMOUNT:NONE"
     Object.keys(winTitles).forEach((title) => {
       document.getElementById(
         title
-      ).textContent = `Amount: ${winTitles[title]}`;
+      ).textContent = `Amount: ${winTitles[title].prizeMoney}`;
     });
 
     document.getElementById("calculate").setAttribute("calculated", "yeah");
@@ -227,6 +229,8 @@ export const endGame = () => {
   }
 
   // Checking if winners for all titles are available
+  // "WINTITLES" IS USED HERE JUST USE THE TITLES TO GRAB THE ELEMENTS IN DOM
+  // NO MANIPULATION IS DONE HERE
   let somethingEmpty = Object.keys(winTitles).some((title) => {
     let length = document.getElementById(`${title}_`).value.trim().length;
     return length < 1;
@@ -251,14 +255,18 @@ export const endGame = () => {
       const boardContainer = document.createElement("div");
       boardContainer.className = "winners-board-container";
 
-      const winners = Object.keys(winTitles).map((title) =>
-        document.getElementById(`${title}_`).value.trim()
+      // "WINTITLES" IS USED HERE TO
+      // winTitles ->  winner prop is set below
+      Object.keys(winTitles).forEach(
+        (title) =>
+          (winTitles[title].winner = document
+            .getElementById(`${title}_`)
+            .value.trim())
       );
 
       const childElement = showWinnersBoard(
         "🎉 Congratulations 🎉",
         winTitles,
-        winners,
         true
       );
 

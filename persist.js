@@ -21,9 +21,6 @@ export const storeLocally = (moneyCollected, titlesAndPrizes) => {
 
   const key = Object.keys(localData).length + 1;
   const playedAt = new Date(Date.now()).toLocaleString();
-  const winners = Object.keys(titlesAndPrizes).map((title) =>
-    document.getElementById(`${title}_`).value.trim()
-  );
 
   localData = {
     ...localData,
@@ -32,7 +29,6 @@ export const storeLocally = (moneyCollected, titlesAndPrizes) => {
       moneyCollected,
       gameData: {
         titlesAndPrizes,
-        winners,
       },
     },
   };
@@ -63,7 +59,6 @@ export const gameStats = () => {
       const childElement = showWinnersBoard(
         title,
         gameData.titlesAndPrizes,
-        gameData.winners,
         false
       );
 
@@ -75,4 +70,15 @@ export const gameStats = () => {
   } else {
     showAlert("Sorry! There is no data to display 😥😥", "info");
   }
+};
+
+// Generates all the player stats
+export const playerStats = () => {
+  // const localData = JSON.parse(getLocalStorage("TAMBOLA_STORAGE_DATA"));
+  // const playersList = {};
+
+  // Object.keys(localData).forEach((game) => {
+  //   localData.game.gameData;
+  // });
+  console.log("UNDEFINED");
 };

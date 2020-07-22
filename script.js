@@ -9,7 +9,7 @@ import {
 } from "./utils.js";
 
 import GAME_DATA from "./gameData.js";
-import { gameStats } from "./persist.js";
+import { gameStats, playerStats } from "./persist.js";
 
 // EVENT LISTENERS
 
@@ -36,6 +36,11 @@ document.getElementById("automatic").addEventListener("click", () => {
 // GAME STATS
 document.getElementById("game-stats").addEventListener("click", () => {
   gameStats();
+});
+
+// PLAYER STATS
+document.getElementById("player-stats").addEventListener("click", () => {
+  playerStats();
 });
 
 // Get a random number and edits the style for that number, updates history board

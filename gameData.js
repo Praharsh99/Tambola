@@ -4,21 +4,31 @@ const GAME_DATA = {
     playedAt: "7/18/2020, 10:43:05 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 19,
-        _1st_line: 28.5,
-        _2nd_line: 28.5,
-        _3rd_line: 28.5,
-        _housefull_1: 47.5,
-        _housefull_2: 38,
+        _jaldi_5: {
+          prizeMoney: 19,
+          winner: "Praharsh",
+        },
+        _1st_line: {
+          prizeMoney: 28.5,
+          winner: "Vidhathri",
+        },
+        _2nd_line: {
+          prizeMoney: 28.5,
+          winner: "Vidhathri",
+        },
+        _3rd_line: {
+          prizeMoney: 28.5,
+          winner: "Rajamannar",
+        },
+        _housefull_1: {
+          prizeMoney: 47.5,
+          winner: "Sumedh",
+        },
+        _housefull_2: {
+          prizeMoney: 38,
+          winner: "Anuhya",
+        },
       },
-      winners: [
-        "Praharsh",
-        "Vidhathri",
-        "Vidhathri",
-        "Rajamannar",
-        "Sumedh",
-        "Anuhya",
-      ],
     },
   },
   2: {
@@ -26,21 +36,31 @@ const GAME_DATA = {
     playedAt: "7/18/2020, 11:16:12 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 23,
-        _1st_line: 34.5,
-        _2nd_line: 34.5,
-        _3rd_line: 34.5,
-        _housefull_1: 57.5,
-        _housefull_2: 46,
+        _jaldi_5: {
+          prizeMoney: 23,
+          winner: "Aaruhya",
+        },
+        _1st_line: {
+          prizeMoney: 34.5,
+          winner: "Anuhya",
+        },
+        _2nd_line: {
+          prizeMoney: 34.5,
+          winner: "Anuhya",
+        },
+        _3rd_line: {
+          prizeMoney: 34.5,
+          winner: "Aaruhya",
+        },
+        _housefull_1: {
+          prizeMoney: 57.5,
+          winner: "Aaradhya",
+        },
+        _housefull_2: {
+          prizeMoney: 46,
+          winner: "Subba Rao",
+        },
       },
-      winners: [
-        "Aaruhya",
-        "Anuhya",
-        "Anuhya",
-        "Aaruhya",
-        "Aaradhya",
-        "Subba Rao",
-      ],
     },
   },
   3: {
@@ -48,21 +68,31 @@ const GAME_DATA = {
     playedAt: "7/18/2020, 11:31:36 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 23,
-        _1st_line: 34.5,
-        _2nd_line: 34.5,
-        _3rd_line: 34.5,
-        _housefull_1: 57.5,
-        _housefull_2: 46,
+        _jaldi_5: {
+          prizeMoney: 23,
+          winner: "Ammamma",
+        },
+        _1st_line: {
+          prizeMoney: 34.5,
+          winner: "Vidhathri",
+        },
+        _2nd_line: {
+          prizeMoney: 34.5,
+          winner: "Obul Reddy",
+        },
+        _3rd_line: {
+          prizeMoney: 34.5,
+          winner: "Obul Reddy",
+        },
+        _housefull_1: {
+          prizeMoney: 57.5,
+          winner: "Obul Reddy",
+        },
+        _housefull_2: {
+          prizeMoney: 46,
+          winner: "Sumedh",
+        },
       },
-      winners: [
-        "Ammamma",
-        "Vidhathri",
-        "Obul Reddy",
-        "Obul Reddy",
-        "Obul Reddy",
-        "Sumedh",
-      ],
     },
   },
   4: {
@@ -70,21 +100,31 @@ const GAME_DATA = {
     playedAt: "7/18/2020, 11:46:56 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 23,
-        _1st_line: 34.5,
-        _2nd_line: 34.5,
-        _3rd_line: 34.5,
-        _housefull_1: 57.5,
-        _housefull_2: 46,
+        _jaldi_5: {
+          prizeMoney: 23,
+          winner: "Sriram",
+        },
+        _1st_line: {
+          prizeMoney: 34.5,
+          winner: "Vidhathri",
+        },
+        _2nd_line: {
+          prizeMoney: 34.5,
+          winner: "Rajamannar",
+        },
+        _3rd_line: {
+          prizeMoney: 34.5,
+          winner: "Sumedh",
+        },
+        _housefull_1: {
+          prizeMoney: 57.5,
+          winner: "Subba Rao",
+        },
+        _housefull_2: {
+          prizeMoney: 46,
+          winner: "Vidhathri",
+        },
       },
-      winners: [
-        "Sriram",
-        "Vidhathri",
-        "Rajamannar",
-        "Sumedh",
-        "Subba Rao",
-        "Vidhathri",
-      ],
     },
   },
   5: {
@@ -92,21 +132,31 @@ const GAME_DATA = {
     playedAt: "7/19/2020, 05:57:22 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 24,
-        _1st_line: 36,
-        _2nd_line: 36,
-        _3rd_line: 36,
-        _housefull_1: 60,
-        _housefull_2: 48,
+        _jaldi_5: {
+          prizeMoney: 24,
+          winner: "Ammamma",
+        },
+        _1st_line: {
+          prizeMoney: 36,
+          winner: "Ammamma",
+        },
+        _2nd_line: {
+          prizeMoney: 36,
+          winner: "Ammamma",
+        },
+        _3rd_line: {
+          prizeMoney: 36,
+          winner: "Obul Reddy",
+        },
+        _housefull_1: {
+          prizeMoney: 60,
+          winner: "Ammamma",
+        },
+        _housefull_2: {
+          prizeMoney: 48,
+          winner: "Madhavi",
+        },
       },
-      winners: [
-        "Ammamma",
-        "Ammamma",
-        "Ammamma",
-        "Obul Reddy",
-        "Ammamma",
-        "Madhavi",
-      ],
     },
   },
   6: {
@@ -114,21 +164,31 @@ const GAME_DATA = {
     playedAt: "7/19/2020, 06:10:07 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 22,
-        _1st_line: 33,
-        _2nd_line: 33,
-        _3rd_line: 33,
-        _housefull_1: 55,
-        _housefull_2: 44,
+        _jaldi_5: {
+          prizeMoney: 22,
+          winner: "Sumedh",
+        },
+        _1st_line: {
+          prizeMoney: 33,
+          winner: "Sumedh",
+        },
+        _2nd_line: {
+          prizeMoney: 33,
+          winner: "Sumaukthi",
+        },
+        _3rd_line: {
+          prizeMoney: 33,
+          winner: "Obul Reddy & Rajamannar",
+        },
+        _housefull_1: {
+          prizeMoney: 55,
+          winner: "Rajamannar",
+        },
+        _housefull_2: {
+          prizeMoney: 44,
+          winner: "Manasvini",
+        },
       },
-      winners: [
-        "Sumedh",
-        "Sumedh",
-        "Sumaukthi",
-        "Obul Reddy & Rajamannar",
-        "Rajamannar",
-        "Manasvini",
-      ],
     },
   },
   7: {
@@ -136,21 +196,31 @@ const GAME_DATA = {
     playedAt: "7/19/2020, 06:32:46 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 22,
-        _1st_line: 33,
-        _2nd_line: 33,
-        _3rd_line: 33,
-        _housefull_1: 55,
-        _housefull_2: 44,
+        _jaldi_5: {
+          prizeMoney: 22,
+          winner: "Rajamannar",
+        },
+        _1st_line: {
+          prizeMoney: 33,
+          winner: "Rajamannar",
+        },
+        _2nd_line: {
+          prizeMoney: 33,
+          winner: "Rajamannar",
+        },
+        _3rd_line: {
+          prizeMoney: 33,
+          winner: "Svanik",
+        },
+        _housefull_1: {
+          prizeMoney: 55,
+          winner: "Rajamannar",
+        },
+        _housefull_2: {
+          prizeMoney: 44,
+          winner: "Obul Reddy",
+        },
       },
-      winners: [
-        "Rajamannar",
-        "Rajamannar",
-        "Rajamannar",
-        "Svanik",
-        "Rajamannar",
-        "Obul Reddy",
-      ],
     },
   },
   8: {
@@ -158,21 +228,31 @@ const GAME_DATA = {
     playedAt: "7/19/2020, 07:00:12 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 25,
-        _1st_line: 37.5,
-        _2nd_line: 37.5,
-        _3rd_line: 37.5,
-        _housefull_1: 62.5,
-        _housefull_2: 50,
+        _jaldi_5: {
+          prizeMoney: 25,
+          winner: "Sriram",
+        },
+        _1st_line: {
+          prizeMoney: 37.5,
+          winner: "Sumedh",
+        },
+        _2nd_line: {
+          prizeMoney: 37.5,
+          winner: "Rama & Aaradhya",
+        },
+        _3rd_line: {
+          prizeMoney: 37.5,
+          winner: "Sriram",
+        },
+        _housefull_1: {
+          prizeMoney: 62.5,
+          winner: "Sumaukthi",
+        },
+        _housefull_2: {
+          prizeMoney: 50,
+          winner: "Rajamannar",
+        },
       },
-      winners: [
-        "Sriram",
-        "Sumedh",
-        "Rama & Aaradhya",
-        "Sriram",
-        "Sumaukthi",
-        "Rajamannar",
-      ],
     },
   },
   9: {
@@ -180,21 +260,31 @@ const GAME_DATA = {
     playedAt: "7/19/2020, 07:23:31 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 24,
-        _1st_line: 36,
-        _2nd_line: 36,
-        _3rd_line: 36,
-        _housefull_1: 60,
-        _housefull_2: 48,
+        _jaldi_5: {
+          prizeMoney: 24,
+          winner: "Obul Reddy",
+        },
+        _1st_line: {
+          prizeMoney: 36,
+          winner: "Sumaukthi",
+        },
+        _2nd_line: {
+          prizeMoney: 36,
+          winner: "Obul Reddy & Sriram",
+        },
+        _3rd_line: {
+          prizeMoney: 36,
+          winner: "Aaruhya",
+        },
+        _housefull_1: {
+          prizeMoney: 60,
+          winner: "Sumaukthi",
+        },
+        _housefull_2: {
+          prizeMoney: 48,
+          winner: "Vidhathri & Anuhya",
+        },
       },
-      winners: [
-        "Obul Reddy",
-        "Sumaukthi",
-        "Obul Reddy & Sriram",
-        "Aaruhya",
-        "Sumaukthi",
-        "Vidhathri & Anuhya",
-      ],
     },
   },
   10: {
@@ -202,21 +292,31 @@ const GAME_DATA = {
     playedAt: "7/19/2020, 07:47:24 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 24,
-        _1st_line: 36,
-        _2nd_line: 36,
-        _3rd_line: 36,
-        _housefull_1: 60,
-        _housefull_2: 48,
+        _jaldi_5: {
+          prizeMoney: 24,
+          winner: "Madhavi",
+        },
+        _1st_line: {
+          prizeMoney: 36,
+          winner: "Anuhya",
+        },
+        _2nd_line: {
+          prizeMoney: 36,
+          winner: "Manasvini",
+        },
+        _3rd_line: {
+          prizeMoney: 36,
+          winner: "Sumedh",
+        },
+        _housefull_1: {
+          prizeMoney: 60,
+          winner: "Ammamma",
+        },
+        _housefull_2: {
+          prizeMoney: 48,
+          winner: "Rajamannar",
+        },
       },
-      winners: [
-        "Madhavi",
-        "Anuhya",
-        "Manasvini",
-        "Sumedh",
-        "Ammamma",
-        "Rajamannar",
-      ],
     },
   },
   11: {
@@ -224,21 +324,31 @@ const GAME_DATA = {
     playedAt: "7/20/2020, 09:57:10 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 24,
-        _1st_line: 36,
-        _2nd_line: 36,
-        _3rd_line: 36,
-        _housefull_1: 60,
-        _housefull_2: 48,
+        _jaldi_5: {
+          prizeMoney: 24,
+          winner: "Vijay Rama Rao",
+        },
+        _1st_line: {
+          prizeMoney: 36,
+          winner: "Rajamannar",
+        },
+        _2nd_line: {
+          prizeMoney: 36,
+          winner: "Svanik",
+        },
+        _3rd_line: {
+          prizeMoney: 36,
+          winner: "Vidhathri",
+        },
+        _housefull_1: {
+          prizeMoney: 60,
+          winner: "Svanik",
+        },
+        _housefull_2: {
+          prizeMoney: 48,
+          winner: "Aaruhya",
+        },
       },
-      winners: [
-        "Vijay Rama Rao",
-        "Rajamannar",
-        "Svanik",
-        "Vidhathri",
-        "Svanik",
-        "Aaruhya",
-      ],
     },
   },
   12: {
@@ -246,21 +356,31 @@ const GAME_DATA = {
     playedAt: "7/20/2020, 10:10:01 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 26,
-        _1st_line: 39,
-        _2nd_line: 39,
-        _3rd_line: 39,
-        _housefull_1: 65,
-        _housefull_2: 52,
+        _jaldi_5: {
+          prizeMoney: 26,
+          winner: "Obul Reddy",
+        },
+        _1st_line: {
+          prizeMoney: 39,
+          winner: "Madhavi",
+        },
+        _2nd_line: {
+          prizeMoney: 39,
+          winner: "Anuhya",
+        },
+        _3rd_line: {
+          prizeMoney: 39,
+          winner: "Vijay Rama Rao",
+        },
+        _housefull_1: {
+          prizeMoney: 65,
+          winner: "Rajamannar",
+        },
+        _housefull_2: {
+          prizeMoney: 52,
+          winner: "Vidhathri & Rama",
+        },
       },
-      winners: [
-        "Obul Reddy",
-        "Madhavi",
-        "Anuhya",
-        "Vijay Rama Rao",
-        "Rajamannar",
-        "Vidhathri & Rama",
-      ],
     },
   },
   13: {
@@ -268,21 +388,31 @@ const GAME_DATA = {
     playedAt: "7/20/2020, 10:24:13 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 25,
-        _1st_line: 37.5,
-        _2nd_line: 37.5,
-        _3rd_line: 37.5,
-        _housefull_1: 62.5,
-        _housefull_2: 50,
+        _jaldi_5: {
+          prizeMoney: 25,
+          winner: "Sakuntala",
+        },
+        _1st_line: {
+          prizeMoney: 37.5,
+          winner: "Madhavi",
+        },
+        _2nd_line: {
+          prizeMoney: 37.5,
+          winner: "Aaruhya",
+        },
+        _3rd_line: {
+          prizeMoney: 37.5,
+          winner: "Manasvini",
+        },
+        _housefull_1: {
+          prizeMoney: 62.5,
+          winner: "Madhavi",
+        },
+        _housefull_2: {
+          prizeMoney: 50,
+          winner: "Subba Rao",
+        },
       },
-      winners: [
-        "Sakuntala",
-        "Madhavi",
-        "Aaruhya",
-        "Manasvini",
-        "Madhavi",
-        "Subba Rao",
-      ],
     },
   },
   14: {
@@ -290,21 +420,31 @@ const GAME_DATA = {
     playedAt: "7/20/2020, 10:38:27 PM",
     gameData: {
       titlesAndPrizes: {
-        _jaldi_5: 25,
-        _1st_line: 37.5,
-        _2nd_line: 37.5,
-        _3rd_line: 37.5,
-        _housefull_1: 62.5,
-        _housefull_2: 50,
+        _jaldi_5: {
+          prizeMoney: 25,
+          winner: "Madhavi",
+        },
+        _1st_line: {
+          prizeMoney: 37.5,
+          winner: "Rama",
+        },
+        _2nd_line: {
+          prizeMoney: 37.5,
+          winner: "Vijay Rama Rao & Svanik",
+        },
+        _3rd_line: {
+          prizeMoney: 37.5,
+          winner: "Sumaukthi",
+        },
+        _housefull_1: {
+          prizeMoney: 62.5,
+          winner: "Vidhathri",
+        },
+        _housefull_2: {
+          prizeMoney: 50,
+          winner: "Rama",
+        },
       },
-      winners: [
-        "Madhavi",
-        "Rama",
-        "Vijay Rama Rao & Svanik",
-        "Sumaukthi",
-        "Vidhathri",
-        "Rama",
-      ],
     },
   },
 };
