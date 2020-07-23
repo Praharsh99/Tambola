@@ -267,6 +267,7 @@ export const endGame = () => {
       const childElement = showWinnersBoard(
         "🎉 Congratulations 🎉",
         winTitles,
+        false,
         true
       );
 

@@ -255,6 +255,7 @@ header {
   align-self: center;
   backface-visibility: hidden;
   outline: none;
+  user-select: none;
 }
 
 .btn:hover {
@@ -400,6 +401,7 @@ footer {
   text-align: center;
   padding-bottom: 1.2rem;
   border-bottom: 1px solid #fff;
+  user-select: none;
 }
 
 .main-title {
