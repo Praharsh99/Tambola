@@ -3,6 +3,7 @@ import { showWinnersBoard } from "./modal.js";
 import { toggleBoard } from "./reusable.functions.js";
 import { storeLocally } from "./persist.js";
 import showAlert from "./alerts.js";
+import speak from "./speak.js";
 
 // GLOBAL VARIABLES
 
@@ -123,6 +124,8 @@ export const readNumber = (shouldIExecute) => {
         numbersRead[numbersRead.length - 2] || "-",
         numbersRead[numbersRead.length - 3] || "-"
       );
+
+      speak();
     } else {
       showAlert(
         "All the numbers are read! Start a new game to play again",
