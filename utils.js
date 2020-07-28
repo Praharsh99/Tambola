@@ -13,7 +13,8 @@ import speak from "./speak.js";
 // This variable becomes "0" when the pause button is clicked and "1" when resume button is clicked
 // So, when the setInterval() method is about to call the readNumber(arg) method "0" is passed to the method
 // Hence prevents the number overflow bug
-let iWillDecide = 1;
+let iWillDecide = 1,
+  timer = 4;
 
 // POPULATES NUMBERS TO BOARD USE THIS FOR NEW GAME!!!
 const tambolaBoard = document.querySelector(".board");
@@ -62,11 +63,6 @@ export const populateWinningTitlesPrices = () => {
   }
 };
 
-// CALL READ NUMBER FUNCTION FOR MANUAL CALLING READ NUMBER
-export const callReadNumber = () => {
-  readNumber(iWillDecide);
-};
-
 // CREATES A RANDOM NUMBER
 const getRandomNumber = () => {
   let randNumForKeys = parseInt(Math.random() * 10);
@@ -88,50 +84,48 @@ const updateHistoryBoard = (current, prev, prev_2) => {
 };
 
 //  Call the random number generator and changes the style for that number on board
-export const readNumber = (shouldIExecute) => {
-  if (shouldIExecute) {
-    if (numbersRead.length < 90) {
-      let currentNumber;
-      let isNewNumber = true;
+export const readNumber = () => {
+  if (numbersRead.length < 90) {
+    let currentNumber;
+    let isNewNumber = true;
 
-      // Get a random number untill it is a new one!
-      while (isNewNumber) {
-        let { randNumForKeys, randNumForValues } = getRandomNumber();
+    // Get a random number untill it is a new one!
+    while (isNewNumber) {
+      let { randNumForKeys, randNumForValues } = getRandomNumber();
 
-        // randNumForKeys -> decides the tens place
-        // randNumForValues -> decides the units place
-        currentNumber = +`${randNumForKeys}${randNumForValues}`;
+      // randNumForKeys -> decides the tens place
+      // randNumForValues -> decides the units place
+      currentNumber = +`${randNumForKeys}${randNumForValues}`;
 
-        if (!currentNumber) isNewNumber = true;
-        else isNewNumber = numbersRead.includes(currentNumber);
-      }
-
-      // Push that number to the read list
-      numbersRead.push(currentNumber);
-
-      // Update the number on the board with new style
-      document.getElementById(currentNumber).classList.add("number-highlight");
-
-      // Update the previous highlighted element with red color
-      if (numbersRead[numbersRead.length - 2]) {
-        document.getElementById(numbersRead[numbersRead.length - 2]).className =
-          "number-block number-read";
-      }
-
-      // Update the history board
-      updateHistoryBoard(
-        currentNumber,
-        numbersRead[numbersRead.length - 2] || "-",
-        numbersRead[numbersRead.length - 3] || "-"
-      );
-
-      speak();
-    } else {
-      showAlert(
-        "All the numbers are read! Start a new game to play again",
-        "success"
-      );
+      if (!currentNumber) isNewNumber = true;
+      else isNewNumber = numbersRead.includes(currentNumber);
     }
+
+    // Push that number to the read list
+    numbersRead.push(currentNumber);
+
+    // Update the number on the board with new style
+    document.getElementById(currentNumber).classList.add("number-highlight");
+
+    // Update the previous highlighted element with red color
+    if (numbersRead[numbersRead.length - 2]) {
+      document.getElementById(numbersRead[numbersRead.length - 2]).className =
+        "number-block number-read";
+    }
+
+    // Update the history board
+    updateHistoryBoard(
+      currentNumber,
+      numbersRead[numbersRead.length - 2] || "-",
+      numbersRead[numbersRead.length - 3] || "-"
+    );
+
+    speak();
+  } else {
+    showAlert(
+      "All the numbers are read! Start a new game to play again",
+      "success"
+    );
   }
 };
 
@@ -144,13 +138,21 @@ export const newGame = () => {
   response ? location.reload() : showAlert("Good Choice 😎", "success");
 };
 
-// TIMER FUNCTION
-const startInterval = (timer) => {
-  let clearId = setInterval(() => {
-    readNumber(iWillDecide);
-  }, timer * 1000);
+// Related to TIMER FUNCTION
+const promiseFun = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (iWillDecide) readNumber();
+      resolve();
+    }, timer * 1000);
+  });
+};
 
-  return clearId;
+// TIMER FUNCTION
+const startInterval = async () => {
+  while (iWillDecide) {
+    await promiseFun();
+  }
 };
 
 // MANUAL GAMEPLAY
@@ -158,11 +160,12 @@ export const manual = () => {
   let autoButton = document.getElementById("auto");
 
   if (autoButton) {
-    iWillDecide = 1;
-    autoButton.id = "rand";
-    autoButton.textContent = "Call";
-    autoButton.removeAttribute("timer-id");
-    autoButton.removeEventListener("click", handleClickEvent);
+    const randBtn = document.getElementById("rand");
+
+    randBtn.className = "btn";
+    randBtn.id = "rand";
+    randBtn.textContent = "Call";
+    randBtn.parentElement.replaceChild(randBtn, autoButton);
 
     showAlert(
       "Switched to manual mode! To call the next number click the call button 👇🏻",
@@ -173,6 +176,15 @@ export const manual = () => {
   }
 };
 
+// This function handles the click event for automatic button
+const handleClickEvent = (e) => {
+  iWillDecide = iWillDecide ? 0 : 1;
+
+  iWillDecide
+    ? ((e.target.textContent = "Pause"), startInterval())
+    : (e.target.textContent = "Continue");
+};
+
 // AUTOMATIC GAMEPLAY
 export const automatic = () => {
   showAlert(
@@ -180,37 +192,27 @@ export const automatic = () => {
     "info"
   );
 
-  document.getElementById("rand").id = "auto";
-  buttonActions();
-};
+  const randBtn = document.getElementById("rand");
 
-// THIS FUNCTION WILL RESUME AND PAUSE THE GAME
-const handleClickEvent = () => {
-  iWillDecide = iWillDecide == 1 ? 0 : 1;
-  buttonActions();
-};
+  if (randBtn) {
+    const autoButton = document.createElement("button");
 
-const buttonActions = () => {
-  let actionButton = document.getElementById("auto");
-  let attr = actionButton.getAttribute("timer-id");
+    autoButton.className = "btn";
+    autoButton.id = "auto";
+    autoButton.textContent = "Pause";
 
-  if (!attr) {
-    let timer = 2;
-    let clearId = startInterval(timer);
+    iWillDecide = 1;
 
-    actionButton.textContent = "Pause";
+    autoButton.addEventListener("click", (e) => {
+      handleClickEvent(e);
+    });
 
-    if (attr === null) {
-      actionButton.addEventListener("click", handleClickEvent);
-    }
+    randBtn.parentElement.replaceChild(autoButton, randBtn);
 
-    actionButton.setAttribute("timer-id", clearId);
+    // Call the startInterval function
+    startInterval();
   } else {
-    let clearId = +actionButton.getAttribute("timer-id");
-    actionButton.textContent = "Resume";
-    actionButton.setAttribute("timer-id", "");
-
-    clearInterval(clearId);
+    showAlert("Already in auto mode 🤦🏻‍♂️🤦🏻‍♂️", "error");
   }
 };
 
