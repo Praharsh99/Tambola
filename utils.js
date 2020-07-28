@@ -19,6 +19,9 @@ let iWillDecide = 1,
 // POPULATES NUMBERS TO BOARD USE THIS FOR NEW GAME!!!
 const tambolaBoard = document.querySelector(".board");
 
+// Stores all the timers created by the start interval function
+let clearIds = [];
+
 export const populateBoard = () => {
   for (var i = 1; i < 91; i++) {
     // Creating the number block and inserting the number into it
@@ -138,11 +141,37 @@ export const newGame = () => {
   response ? location.reload() : showAlert("Good Choice 😎", "success");
 };
 
+// Clear all setTimeouts
+const clearTimeouts = () => {
+  let autoButton = document.getElementById("auto");
+  const loader = document.createElement("div");
+  loader.className = "loader";
+
+  autoButton.textContent = "";
+  autoButton.disabled = true;
+  autoButton.appendChild(loader);
+
+  clearIds.forEach((id) => {
+    console.log("Clearing: ", id);
+    clearTimeout(id);
+  });
+
+  clearIds = [];
+
+  setTimeout(() => {
+    autoButton.removeChild(loader);
+    autoButton.textContent = "Continue";
+    autoButton.disabled = false;
+  }, 4000);
+};
+
 // Related to TIMER FUNCTION
 const promiseFun = () => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
+    let clearId = setTimeout(() => {
       if (iWillDecide) readNumber();
+      clearIds.push(clearId);
+
       resolve();
     }, timer * 1000);
   });
@@ -160,12 +189,18 @@ export const manual = () => {
   let autoButton = document.getElementById("auto");
 
   if (autoButton) {
-    const randBtn = document.getElementById("rand");
+    iWillDecide = 0;
+    const randBtn = document.createElement("button");
 
     randBtn.className = "btn";
     randBtn.id = "rand";
     randBtn.textContent = "Call";
-    randBtn.parentElement.replaceChild(randBtn, autoButton);
+
+    randBtn.addEventListener("click", () => {
+      readNumber();
+    });
+
+    autoButton.parentElement.replaceChild(randBtn, autoButton);
 
     showAlert(
       "Switched to manual mode! To call the next number click the call button 👇🏻",
@@ -182,7 +217,7 @@ const handleClickEvent = (e) => {
 
   iWillDecide
     ? ((e.target.textContent = "Pause"), startInterval())
-    : (e.target.textContent = "Continue");
+    : clearTimeouts();
 };
 
 // AUTOMATIC GAMEPLAY

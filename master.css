@@ -251,7 +251,7 @@ header {
   background-color: rgb(46, 45, 45);
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-top: 2rem;
+  margin-top: 1rem;
   align-self: center;
   backface-visibility: hidden;
   outline: none;
@@ -479,4 +479,24 @@ footer {
   text-align: right;
   width: 15%;
   color: #1121e5;
+}
+
+/* LOADERS */
+.loader {
+  border: 2px solid #d3d3d3; /* Light grey */
+  border-top: 2px solid rgb(245, 75, 75); /* Blue */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

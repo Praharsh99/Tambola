@@ -44,9 +44,12 @@ document.getElementById("player-stats").addEventListener("click", () => {
 });
 
 // Get a random number and edits the style for that number, updates history board
-document.getElementById("rand").addEventListener("click", () => {
-  readNumber();
-});
+const randBtn = document.getElementById("rand");
+if (randBtn) {
+  randBtn.addEventListener("click", () => {
+    readNumber();
+  });
+}
 
 // Calculates the prices for each winning title depending on the collected amount
 document.getElementById("calculate").addEventListener("click", () => {
