@@ -152,7 +152,6 @@ const clearTimeouts = () => {
   autoButton.appendChild(loader);
 
   clearIds.forEach((id) => {
-    console.log("Clearing: ", id);
     clearTimeout(id);
   });
 
@@ -162,7 +161,7 @@ const clearTimeouts = () => {
     autoButton.removeChild(loader);
     autoButton.textContent = "Continue";
     autoButton.disabled = false;
-  }, 4000);
+  }, 3500);
 };
 
 // Related to TIMER FUNCTION
@@ -223,7 +222,7 @@ const handleClickEvent = (e) => {
 // AUTOMATIC GAMEPLAY
 export const automatic = () => {
   showAlert(
-    "A NEW NUMBER WILL APPEAR ON THE BOARD FOR EVERY 4 SECONDS ! 👀",
+    `A NEW NUMBER WILL APPEAR ON THE BOARD FOR EVERY ${timer} SECONDS ! 👀`,
     "info"
   );
 

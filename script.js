@@ -61,12 +61,9 @@ document.getElementById("end-game").addEventListener("click", () => {
   endGame();
 });
 
-// document.getElementById("btnn").onclick = function () {
-//   speak();
-// };
-
 const callDB = () => {
   const prevData = JSON.stringify(GAME_DATA);
+  localStorage.removeItem("TAMBOLA_STORAGE_DATA");
   localStorage.setItem("TAMBOLA_STORAGE_DATA", prevData);
 };
 
