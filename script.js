@@ -5,6 +5,8 @@ import {
   newGame,
   manual,
   automatic,
+  undoMove,
+  toggleSpeaker,
   endGame,
 } from "./utils.js";
 
@@ -60,6 +62,42 @@ document.getElementById("calculate").addEventListener("click", () => {
 document.getElementById("end-game").addEventListener("click", () => {
   endGame();
 });
+
+const optionsContainer = document.querySelector(".options-container");
+if (optionsContainer) {
+  optionsContainer.addEventListener("mouseover", () => {
+    optionsContainer.style.transform = "translateX(-50%) translateY(0)";
+    optionsContainer.style.transitionDelay = "0.1s";
+    optionsContainer.style.opacity = 1;
+  });
+
+  optionsContainer.addEventListener("mouseleave", () => {
+    optionsContainer.style.transform = "";
+    optionsContainer.style.transitionDelay = "1s";
+    optionsContainer.style.opacity = "";
+  });
+}
+
+const undoBtn = document.getElementById("undo");
+if (undoBtn) {
+  undoBtn.addEventListener("click", () => {
+    undoMove();
+  });
+}
+
+const speaker = document.getElementById("speaker");
+if (speaker) {
+  speaker.addEventListener("click", () => {
+    const status = speaker.dataset.status;
+    status
+      ? ((speaker.dataset.status = ""),
+        (speaker.firstElementChild.src = "./svg/mute.svg"))
+      : ((speaker.dataset.status = "on"),
+        (speaker.firstElementChild.src = "./svg/speaker.svg"));
+
+    toggleSpeaker();
+  });
+}
 
 const callDB = () => {
   const prevData = JSON.stringify(GAME_DATA);

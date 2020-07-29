@@ -3,7 +3,7 @@ import { showWinnersBoard } from "./modal.js";
 import { toggleBoard } from "./reusable.functions.js";
 import { storeLocally } from "./persist.js";
 import showAlert from "./alerts.js";
-import speak from "./speak.js";
+import speakNumber from "./speak.js";
 
 // GLOBAL VARIABLES
 
@@ -13,11 +13,19 @@ import speak from "./speak.js";
 // This variable becomes "0" when the pause button is clicked and "1" when resume button is clicked
 // So, when the setInterval() method is about to call the readNumber(arg) method "0" is passed to the method
 // Hence prevents the number overflow bug
-let iWillDecide = 1,
-  timer = 4;
+let iWillDecide = 1;
+let timer = 4;
+
+// Thsi decides the text to speech feature should work or shouldn't
+let shouldISpeak = 1;
 
 // POPULATES NUMBERS TO BOARD USE THIS FOR NEW GAME!!!
 const tambolaBoard = document.querySelector(".board");
+
+// This array contains the undo numbers
+const undoStack = [];
+let somethingInUndoStack = false;
+let popedNumber = undefined;
 
 // Stores all the timers created by the start interval function
 let clearIds = [];
@@ -66,6 +74,34 @@ export const populateWinningTitlesPrices = () => {
   }
 };
 
+// This function undos the number called
+export const undoMove = () => {
+  if (numbersRead.length > 1) {
+    popedNumber = numbersRead.pop();
+
+    undoStack.push(popedNumber);
+    somethingInUndoStack = true;
+
+    document.getElementById(popedNumber).className = "number-block";
+    document.getElementById(numbersRead[numbersRead.length - 1]).className =
+      "number-block number-highlight";
+
+    // Update the history board
+    updateHistoryBoard(
+      numbersRead[numbersRead.length - 1],
+      numbersRead[numbersRead.length - 2] || "-",
+      numbersRead[numbersRead.length - 3] || "-"
+    );
+  } else {
+    showAlert("Sorry! There's nothing to undo 🤷🏻‍♂️🤷🏻‍♂️", "error");
+  }
+};
+
+// TOGGLES THE TEXT TO SPEECH FUNCTIONALITY
+export const toggleSpeaker = () => {
+  shouldISpeak = shouldISpeak ? 0 : 1;
+};
+
 // CREATES A RANDOM NUMBER
 const getRandomNumber = () => {
   let randNumForKeys = parseInt(Math.random() * 10);
@@ -92,16 +128,22 @@ export const readNumber = () => {
     let currentNumber;
     let isNewNumber = true;
 
-    // Get a random number untill it is a new one!
-    while (isNewNumber) {
-      let { randNumForKeys, randNumForValues } = getRandomNumber();
+    // Checking if there is something in the undo stack
+    // If there is nothing, get a random number, else get the numbers from undo stack
+    if (!somethingInUndoStack) {
+      // Get a random number untill it is a new one!
+      while (isNewNumber) {
+        let { randNumForKeys, randNumForValues } = getRandomNumber();
 
-      // randNumForKeys -> decides the tens place
-      // randNumForValues -> decides the units place
-      currentNumber = +`${randNumForKeys}${randNumForValues}`;
+        // randNumForKeys -> decides the tens place
+        // randNumForValues -> decides the units place
+        currentNumber = +`${randNumForKeys}${randNumForValues}`;
 
-      if (!currentNumber) isNewNumber = true;
-      else isNewNumber = numbersRead.includes(currentNumber);
+        isNewNumber = numbersRead.includes(currentNumber);
+      }
+    } else {
+      currentNumber = undoStack.pop();
+      if (!undoStack.length) somethingInUndoStack = false;
     }
 
     // Push that number to the read list
@@ -123,7 +165,7 @@ export const readNumber = () => {
       numbersRead[numbersRead.length - 3] || "-"
     );
 
-    speak();
+    if (shouldISpeak) speakNumber();
   } else {
     showAlert(
       "All the numbers are read! Start a new game to play again",

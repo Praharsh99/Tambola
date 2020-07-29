@@ -11,7 +11,7 @@ const speakThis = (individualNumber) => {
   synth.speak(utterThis);
 };
 
-async function speak() {
+const speakNumber = () => {
   const number = document.querySelector(".number-highlight").textContent;
   const individualNumber =
     number > 9
@@ -21,6 +21,6 @@ async function speak() {
       : `Single digit ${number}`;
 
   speakThis(individualNumber);
-}
+};
 
-export default speak;
+export default speakNumber;
