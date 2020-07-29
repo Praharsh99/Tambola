@@ -99,6 +99,22 @@ if (speaker) {
   });
 }
 
+const playersDropdown = document.getElementById("dropdown");
+if (playersDropdown) {
+  playersDropdown.addEventListener("click", (event) => {
+    let childWhichWasClicked = event.target;
+
+    if (childWhichWasClicked.className === "player-name") {
+      let sibilingInput =
+        childWhichWasClicked.offsetParent.previousElementSibling;
+
+      sibilingInput.value = sibilingInput.value
+        ? `${sibilingInput.value.trim()} & ${childWhichWasClicked.textContent}`
+        : childWhichWasClicked.textContent;
+    }
+  });
+}
+
 const callDB = () => {
   const prevData = JSON.stringify(GAME_DATA);
   localStorage.removeItem("TAMBOLA_STORAGE_DATA");

@@ -447,4 +447,46 @@ var i = {
       },
     },
   },
+  "33": {
+    playedAt: "7/28/2020, 10:20:02 PM",
+    moneyCollected: "210",
+    gameData: {
+      titlesAndPrizes: {
+        _jaldi_5: { winner: "Obul Reddy", prizeMoney: 21 },
+        _1st_line: { winner: "Vidhathri", prizeMoney: 31.5 },
+        _2nd_line: { winner: "Aaradhya", prizeMoney: 31.5 },
+        _3rd_line: { winner: "Rajamannar", prizeMoney: 31.5 },
+        _housefull_1: { winner: "Svanik", prizeMoney: 52.5 },
+        _housefull_2: { winner: "Rajagopal", prizeMoney: 42 },
+      },
+    },
+  },
+  "34": {
+    playedAt: "7/28/2020, 10:32:29 PM",
+    moneyCollected: "270",
+    gameData: {
+      titlesAndPrizes: {
+        _jaldi_5: { winner: "Rajamannar", prizeMoney: 27 },
+        _1st_line: { winner: "ML Kumar", prizeMoney: 40.5 },
+        _2nd_line: { winner: "Rajamannar", prizeMoney: 40.5 },
+        _3rd_line: { winner: "Ammamma", prizeMoney: 40.5 },
+        _housefull_1: { winner: "Rajagopal", prizeMoney: 67.5 },
+        _housefull_2: { winner: "Obul Reddy", prizeMoney: 54 },
+      },
+    },
+  },
+  "35": {
+    playedAt: "7/28/2020, 10:48:39 PM",
+    moneyCollected: "290",
+    gameData: {
+      titlesAndPrizes: {
+        _jaldi_5: { winner: "Vidhathri", prizeMoney: 29 },
+        _1st_line: { winner: "Rajamannar", prizeMoney: 43.5 },
+        _2nd_line: { winner: "Sakuntala", prizeMoney: 43.5 },
+        _3rd_line: { winner: "Rajamannar & Vijay Rama Rao", prizeMoney: 43.5 },
+        _housefull_1: { winner: "Rajamannar", prizeMoney: 72.5 },
+        _housefull_2: { winner: "ML Kumar", prizeMoney: 58 },
+      },
+    },
+  },
 };
