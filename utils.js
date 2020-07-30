@@ -139,7 +139,9 @@ export const readNumber = () => {
         // randNumForValues -> decides the units place
         currentNumber = +`${randNumForKeys}${randNumForValues}`;
 
-        isNewNumber = numbersRead.includes(currentNumber);
+        // Checking if current number is zero
+        if (currentNumber) isNewNumber = numbersRead.includes(currentNumber);
+        else isNewNumber = true;
       }
     } else {
       currentNumber = undoStack.pop();
