@@ -63,6 +63,15 @@ document.getElementById("end-game").addEventListener("click", () => {
   endGame();
 });
 
+// Adding the event listener for calling the numbers on keypress instead of clicking the button
+document.onkeydown = (event) => {
+  const randBtnExists = document.getElementById("rand");
+
+  if (event.ctrlKey && event.key === " " && randBtnExists) {
+    randBtn.click();
+  }
+};
+
 const optionsContainer = document.querySelector(".options-container");
 if (optionsContainer) {
   optionsContainer.addEventListener("mouseover", () => {
